@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { TrendingUp, Clock, Target, Award, BookOpen, FileCheck, Ticket as TicketIcon, Timer } from "lucide-react";
 
 const kpis = [
-  { label: "Quiz réalisés", value: "47", change: "+12%", icon: BookOpen, color: "text-info" },
+  { label: "Entraînements réalisés", value: "47", change: "+12%", icon: BookOpen, color: "text-info" },
   { label: "Score moyen", value: "78%", change: "+5%", icon: Target, color: "text-success" },
-  { label: "Temps moyen/quiz", value: "8 min", change: "-15%", icon: Clock, color: "text-warning" },
+  { label: "Temps moyen/entraînement", value: "8 min", change: "-15%", icon: Clock, color: "text-warning" },
   { label: "Taux réussite", value: "82%", change: "+8%", icon: Award, color: "text-primary" },
-  { label: "Examens passés", value: "12", change: "+3", icon: FileCheck, color: "text-info" },
-  { label: "Réussite examens", value: "75%", change: "+10%", icon: TrendingUp, color: "text-success" },
+  { label: "Achievements complétés", value: "12", change: "+3", icon: FileCheck, color: "text-info" },
+  { label: "Réussite Achievements", value: "75%", change: "+10%", icon: TrendingUp, color: "text-success" },
   { label: "Tickets résolus", value: "156", change: "+24", icon: TicketIcon, color: "text-warning" },
   { label: "Temps moy. ticket", value: "45 min", change: "-20%", icon: Timer, color: "text-primary" },
 ];
@@ -16,7 +16,7 @@ const themePerf = [
   { theme: "Congés Payés", score: 92, quizzes: 8 },
   { theme: "RTT", score: 85, quizzes: 6 },
   { theme: "Astreintes", score: 78, quizzes: 4 },
-  { theme: "TransGP", score: 65, quizzes: 3 },
+  { theme: "Astreinte", score: 65, quizzes: 3 },
   { theme: "Paramétrage GTA", score: 70, quizzes: 5 },
   { theme: "Heures supplémentaires", score: 88, quizzes: 4 },
   { theme: "Support client", score: 82, quizzes: 6 },

@@ -17,7 +17,7 @@ const results = [
   { title: "Cas pratique : Anomalie pointage salarié multi-sites", category: "cas", theme: "Anomalies temps", excerpt: "Comment résoudre une anomalie de pointage pour un salarié travaillant sur plusieurs établissements avec des plannings différents." },
   { title: "Ticket type : Demande de régularisation heures sup", category: "tickets", theme: "Heures supplémentaires", excerpt: "Modèle de réponse pour traiter une demande de régularisation d'heures supplémentaires non comptabilisées." },
   { title: "Guide paramétrage compteurs GTA", category: "docs", theme: "Paramétrage GTA", excerpt: "Documentation complète sur la configuration des compteurs de temps dans l'application GTA : CP, RTT, CET, repos compensateur." },
-  { title: "Procédure TransGP - Transfert gestion paie", category: "procedures", theme: "TransGP", excerpt: "Guide pas-à-pas pour effectuer un transfert de gestion paie entre deux entités, avec checklist de synchronisation GTA." },
+  { title: "Procédure Astreinte - Transfert gestion paie", category: "procedures", theme: "Astreinte", excerpt: "Guide pas-à-pas pour effectuer un transfert de gestion paie entre deux entités, avec checklist de synchronisation GTA." },
   { title: "Définition : Astreinte et temps d'intervention", category: "definitions", theme: "Astreintes", excerpt: "Distinction entre période d'astreinte et temps d'intervention effectif. Règles de majoration et repos compensateur." },
   { title: "Cas pratique : Calcul prorata RTT temps partiel", category: "cas", theme: "RTT", excerpt: "Méthode de calcul des RTT pour un salarié passant de temps plein à temps partiel en cours d'année." },
 ];

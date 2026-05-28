@@ -26,7 +26,7 @@ const quizzes: Quiz[] = [
   { id: 4, title: "RTT cadre vs non cadre", theme: "RTT", level: "Niveau 1", questions: 8, time: "8 min", difficulty: "Facile" },
   { id: 5, title: "RTT modulation annuelle", theme: "RTT", level: "Niveau 2", questions: 10, time: "12 min", difficulty: "Moyen" },
   { id: 6, title: "Calcul prorata RTT", theme: "RTT", level: "Niveau 3", questions: 6, time: "10 min", difficulty: "Difficile" },
-  { id: 7, title: "Transfert de gestion paie", theme: "TransGP", level: "Niveau 1", questions: 8, time: "10 min", difficulty: "Moyen" },
+  { id: 7, title: "Transfert de gestion paie", theme: "Astreinte", level: "Niveau 1", questions: 8, time: "10 min", difficulty: "Moyen" },
   { id: 8, title: "Règles légales astreinte", theme: "Astreinte", level: "Niveau 1", questions: 10, time: "10 min", difficulty: "Facile" },
   { id: 9, title: "Types de rapports GTA", theme: "Création de rapports", level: "Niveau 1", questions: 8, time: "8 min", difficulty: "Facile" },
 ];
@@ -38,9 +38,9 @@ const mockQuestions: Question[] = [
 ];
 
 const difficultyClass: Record<string, string> = {
-  Facile: "badge-easy",
-  Moyen: "badge-medium",
-  Difficile: "badge-hard",
+  Facile: "bg-green-500/10 text-green-500",
+  Moyen: "bg-orange-500/10 text-orange-500",
+  Difficile: "bg-red-500/10 text-red-500",
 };
 
 export default function GtaQuiz() {
@@ -94,63 +94,78 @@ export default function GtaQuiz() {
     if (!q) return null;
 
     return (
-      <div className="p-6 max-w-2xl mx-auto">
-        <button onClick={() => setActiveQuiz(null)} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6">
-          <ArrowLeft size={16} /> Retour aux quiz
+      <div className="p-8 max-w-3xl mx-auto">
+        <button onClick={() => setActiveQuiz(null)} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-8 transition-colors">
+          <ArrowLeft size={16} /> Retour aux entraînements
         </button>
-        <div className="mb-6">
-          <h2 className="text-lg font-bold text-foreground">{activeQuiz.title}</h2>
-          <div className="flex items-center gap-2 mt-2">
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-foreground">{activeQuiz.title}</h2>
+          <div className="flex items-center gap-3 mt-4">
             <div className="flex-1 bg-secondary rounded-full h-2">
-              <div className="h-2 rounded-full gradient-primary transition-all" style={{ width: `${((currentQ + 1) / mockQuestions.length) * 100}%` }} />
+              <div className="h-2 rounded-full gradient-primary transition-all duration-500" style={{ width: `${((currentQ + 1) / mockQuestions.length) * 100}%` }} />
             </div>
             <span className="text-xs text-muted-foreground font-medium">{currentQ + 1}/{mockQuestions.length}</span>
           </div>
         </div>
 
-        <div className="elevated-card p-6 mb-4">
-          <p className="font-semibold text-foreground mb-6">{q.question}</p>
-          <div className="space-y-3">
+        <motion.div 
+          key={currentQ}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="bg-card border border-border rounded-3xl p-8 mb-6 shadow-sm"
+        >
+          <p className="text-lg font-semibold text-foreground mb-8">{q.question}</p>
+          <div className="space-y-4">
             {q.options.map((opt, i) => {
-              let style = "bg-secondary hover:bg-secondary/80 text-secondary-foreground border border-transparent";
+              let style = "bg-secondary/50 hover:bg-secondary text-secondary-foreground border border-transparent";
               if (confirmed) {
-                if (i === q.correct) style = "bg-success/10 text-success border border-success/30";
-                else if (i === selectedAnswer && i !== q.correct) style = "bg-destructive/10 text-destructive border border-destructive/30";
+                if (i === q.correct) style = "bg-green-500/10 text-green-600 border border-green-500/30";
+                else if (i === selectedAnswer && i !== q.correct) style = "bg-red-500/10 text-red-600 border border-red-500/30";
               } else if (i === selectedAnswer) {
-                style = "bg-primary/10 text-primary border border-primary/30";
+                style = "bg-primary/10 text-primary border border-primary/30 shadow-sm";
               }
               return (
                 <button
                   key={i}
                   onClick={() => !confirmed && setSelectedAnswer(i)}
-                  className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all ${style}`}
+                  className={`w-full text-left px-5 py-4 rounded-2xl text-[15px] font-medium transition-all flex items-center justify-between group ${style}`}
                 >
-                  <span className="mr-2 opacity-50">{String.fromCharCode(65 + i)}.</span>
-                  {opt}
-                  {confirmed && i === q.correct && <CheckCircle size={16} className="inline ml-2" />}
-                  {confirmed && i === selectedAnswer && i !== q.correct && <XCircle size={16} className="inline ml-2" />}
+                  <div>
+                    <span className="mr-3 opacity-50 text-sm font-bold bg-background/50 px-2 py-1 rounded-md">{String.fromCharCode(65 + i)}</span>
+                    {opt}
+                  </div>
+                  {confirmed && i === q.correct && <CheckCircle size={20} className="text-green-500" />}
+                  {confirmed && i === selectedAnswer && i !== q.correct && <XCircle size={20} className="text-red-500" />}
                 </button>
               );
             })}
           </div>
-        </div>
+        </motion.div>
 
-        {confirmed && (
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="elevated-card p-4 mb-4 border-l-4 border-l-info">
-            <p className="text-xs font-semibold text-info mb-1">Explication</p>
-            <p className="text-sm text-muted-foreground">{q.explanation}</p>
-          </motion.div>
-        )}
+        <AnimatePresence>
+          {confirmed && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }} 
+              animate={{ opacity: 1, height: "auto" }} 
+              className="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-5 mb-6 text-blue-700"
+            >
+              <div className="flex items-center gap-2 mb-2 font-semibold">
+                <HelpCircle size={16} /> Explication
+              </div>
+              <p className="text-sm leading-relaxed">{q.explanation}</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div className="flex justify-end">
           {!confirmed ? (
-            <button onClick={confirmAnswer} disabled={selectedAnswer === null} className="px-6 py-2.5 rounded-xl gradient-primary text-primary-foreground text-sm font-semibold disabled:opacity-40 transition-opacity">
-              Valider
+            <button onClick={confirmAnswer} disabled={selectedAnswer === null} className="px-6 py-3 rounded-xl bg-primary text-primary-foreground text-[15px] font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm">
+              Valider ma réponse
             </button>
           ) : (
-            <button onClick={nextQuestion} className="px-6 py-2.5 rounded-xl gradient-primary text-primary-foreground text-sm font-semibold">
-              {currentQ + 1 >= mockQuestions.length ? "Voir le résultat" : "Suivant"}
-              <ChevronRight size={16} className="inline ml-1" />
+            <button onClick={nextQuestion} className="px-6 py-3 rounded-xl bg-primary text-primary-foreground text-[15px] font-semibold flex items-center gap-2 shadow-sm">
+              {currentQ + 1 >= mockQuestions.length ? "Voir le résultat final" : "Question suivante"}
+              <ChevronRight size={18} />
             </button>
           )}
         </div>
@@ -161,39 +176,41 @@ export default function GtaQuiz() {
   // Result screen
   if (activeQuiz && showResult) {
     return (
-      <div className="p-6 max-w-2xl mx-auto">
-        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="elevated-card p-8 text-center">
-          <div className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center mx-auto mb-4">
-            <span className="text-3xl font-bold text-primary-foreground">{score}/{mockQuestions.length}</span>
+      <div className="p-8 max-w-2xl mx-auto">
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-card border border-border rounded-3xl p-10 text-center shadow-lg">
+          <div className="w-24 h-24 rounded-full gradient-primary flex items-center justify-center mx-auto mb-6 shadow-md">
+            <span className="text-4xl font-bold text-primary-foreground">{score}/{mockQuestions.length}</span>
           </div>
-          <h2 className="text-xl font-bold text-foreground mb-2">
+          <h2 className="text-2xl font-bold text-foreground mb-2">
             {score === mockQuestions.length ? "Excellent ! 🎉" : score >= mockQuestions.length / 2 ? "Bien joué ! 👏" : "Continuez vos efforts ! 💪"}
           </h2>
-          <p className="text-sm text-muted-foreground mb-6">
+          <p className="text-base text-muted-foreground mb-8">
             Vous avez obtenu {score} bonne{score > 1 ? "s" : ""} réponse{score > 1 ? "s" : ""} sur {mockQuestions.length}
           </p>
-          <div className="grid grid-cols-2 gap-4 mb-6 text-left">
-            <div className="p-3 rounded-xl bg-success/10">
-              <p className="text-xs text-success font-semibold">Bonnes réponses</p>
-              <p className="text-2xl font-bold text-success">{score}</p>
+          <div className="grid grid-cols-2 gap-4 mb-8 text-left">
+            <div className="p-4 rounded-2xl bg-green-500/10 border border-green-500/20">
+              <p className="text-sm text-green-600 font-semibold mb-1">Bonnes réponses</p>
+              <p className="text-3xl font-bold text-green-700">{score}</p>
             </div>
-            <div className="p-3 rounded-xl bg-destructive/10">
-              <p className="text-xs text-destructive font-semibold">Mauvaises réponses</p>
-              <p className="text-2xl font-bold text-destructive">{mockQuestions.length - score}</p>
+            <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/20">
+              <p className="text-sm text-red-600 font-semibold mb-1">Mauvaises réponses</p>
+              <p className="text-3xl font-bold text-red-700">{mockQuestions.length - score}</p>
             </div>
           </div>
           {score < mockQuestions.length && (
-            <div className="text-left p-4 rounded-xl bg-secondary mb-6">
-              <p className="text-xs font-semibold text-foreground mb-2">📚 Recommandations</p>
-              <p className="text-xs text-muted-foreground">Nous vous conseillons de revoir le quiz "CP fractionnement" et de consulter l'Agent CP pour approfondir vos connaissances.</p>
+            <div className="text-left p-5 rounded-2xl bg-secondary mb-8">
+              <p className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
+                <HelpCircle size={16} /> Recommandations de l'IA
+              </p>
+              <p className="text-sm text-muted-foreground leading-relaxed">Nous vous conseillons de revoir le module "CP fractionnement" dans la base de connaissances et de demander des cas pratiques à l'assistant GTA PT pour approfondir.</p>
             </div>
           )}
-          <div className="flex gap-3 justify-center">
-            <button onClick={() => startQuiz(activeQuiz)} className="px-5 py-2 rounded-xl bg-secondary text-secondary-foreground text-sm font-medium">
+          <div className="flex gap-4 justify-center">
+            <button onClick={() => startQuiz(activeQuiz)} className="px-6 py-3 rounded-xl bg-secondary text-foreground font-medium hover:bg-secondary/80 transition-colors">
               Recommencer
             </button>
-            <button onClick={() => setActiveQuiz(null)} className="px-5 py-2 rounded-xl gradient-primary text-primary-foreground text-sm font-medium">
-              Retour aux quiz
+            <button onClick={() => setActiveQuiz(null)} className="px-6 py-3 rounded-xl bg-foreground text-background font-medium hover:bg-foreground/90 transition-colors">
+              Terminer
             </button>
           </div>
         </motion.div>
@@ -203,50 +220,52 @@ export default function GtaQuiz() {
 
   // Quiz list
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold text-foreground mb-1">GTA Quiz</h2>
-      <p className="text-sm text-muted-foreground mb-6">Testez vos connaissances GTA</p>
+    <div className="p-8 max-w-7xl mx-auto space-y-8">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight mb-2">GTA Training</h1>
+        <p className="text-muted-foreground">Progressez à votre rythme sur les thématiques paie et gestion des temps.</p>
+      </div>
 
-      <div className="flex flex-col sm:flex-row gap-3 mb-6">
+      <div className="flex flex-col sm:flex-row gap-4 mb-8">
         <div className="relative flex-1">
-          <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Rechercher un quiz..."
-            className="w-full pl-10 pr-4 py-2.5 bg-card border border-border rounded-xl text-sm outline-none focus:ring-2 focus:ring-primary/20"
+            placeholder="Rechercher un entraînement..."
+            className="w-full pl-12 pr-4 py-3 bg-card border border-border rounded-xl text-[15px] outline-none focus:ring-2 focus:ring-primary/50 transition-all shadow-sm"
           />
         </div>
         <select
           value={themeFilter}
           onChange={(e) => setThemeFilter(e.target.value)}
-          className="px-3 py-2.5 bg-card border border-border rounded-xl text-sm outline-none"
+          className="px-4 py-3 bg-card border border-border rounded-xl text-[15px] outline-none shadow-sm focus:ring-2 focus:ring-primary/50"
         >
           {themes.map((t) => (
-            <option key={t} value={t}>{t === "all" ? "Toutes thématiques" : t}</option>
+            <option key={t} value={t}>{t === "all" ? "Toutes les thématiques" : t}</option>
           ))}
         </select>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((quiz) => (
           <motion.div
             key={quiz.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -2 }}
+            whileHover={{ y: -4 }}
             onClick={() => startQuiz(quiz)}
-            className="elevated-card p-4 cursor-pointer hover:border-primary/20 transition-all"
+            className="bg-card border border-border rounded-2xl p-6 cursor-pointer hover:shadow-xl hover:border-primary/30 transition-all group"
           >
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-primary/10 text-primary">{quiz.theme}</span>
-              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${difficultyClass[quiz.difficulty]}`}>{quiz.difficulty}</span>
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-[11px] font-bold px-2.5 py-1 rounded-md bg-primary/10 text-primary uppercase tracking-wider">{quiz.theme}</span>
+              <span className={`text-[11px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider ${difficultyClass[quiz.difficulty]}`}>{quiz.difficulty}</span>
             </div>
-            <h3 className="text-sm font-bold text-foreground mb-1">{quiz.title}</h3>
-            <p className="text-xs text-muted-foreground mb-3">{quiz.level}</p>
-            <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
-              <span className="flex items-center gap-1"><HelpCircle size={12} />{quiz.questions} questions</span>
-              <span className="flex items-center gap-1"><Clock size={12} />{quiz.time}</span>
+            <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{quiz.title}</h3>
+            <p className="text-sm text-muted-foreground mb-6">{quiz.level}</p>
+            <div className="flex items-center gap-4 pt-4 border-t border-border/50 text-[13px] text-muted-foreground font-medium">
+              <span className="flex items-center gap-1.5"><HelpCircle size={14} />{quiz.questions} questions</span>
+              <span className="flex items-center gap-1.5"><Clock size={14} />{quiz.time}</span>
             </div>
           </motion.div>
         ))}

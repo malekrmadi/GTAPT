@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Clock, ArrowLeft, Send, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
-const levels = ["Junior", "Intermédiaire", "Senior", "Expert GTA"];
+const levels = ["Niveau Découverte", "Niveau Progression", "Niveau Maîtrise", "Niveau Excellence"];
 
 interface ExamQuestion {
   type: "mcq" | "open";
@@ -15,7 +15,7 @@ interface ExamQuestion {
 const examQuestions: ExamQuestion[] = [
   { type: "mcq", question: "Un salarié en CDD de 6 mois a-t-il droit aux congés payés dès son premier jour de travail ?", options: ["Oui, dès le premier jour", "Non, après 1 mois", "Non, après 3 mois", "Seulement en CDI"], correct: 0 },
   { type: "open", question: "Un client signale que le compteur RTT de son salarié affiche un solde négatif. Rédigez la réponse que vous lui enverriez.", context: "Ticket client #4521 - Entreprise ACME SAS - Convention Syntec" },
-  { type: "mcq", question: "Lors d'un TransGP, quel élément doit être synchronisé en priorité ?", options: ["Les fiches de paie", "Les compteurs de temps (CP, RTT, CET)", "L'organigramme", "Les notes de frais"], correct: 1 },
+  { type: "mcq", question: "Lors d'un Astreinte, quel élément doit être synchronisé en priorité ?", options: ["Les fiches de paie", "Les compteurs de temps (CP, RTT, CET)", "L'organigramme", "Les notes de frais"], correct: 1 },
   { type: "open", question: "Expliquez la procédure de paramétrage d'un nouveau compteur d'heures supplémentaires dans l'outil GTA.", context: "Contexte : Mise en place d'un accord d'entreprise sur les HS" },
   { type: "mcq", question: "Quelle est la durée maximale légale d'une période d'astreinte hebdomadaire ?", options: ["24 heures", "48 heures", "Pas de limite légale spécifique", "35 heures"], correct: 2 },
 ];
@@ -65,8 +65,8 @@ export default function GtaExam() {
   if (!selectedLevel) {
     return (
       <div className="p-6 max-w-3xl mx-auto">
-        <h2 className="text-2xl font-bold text-foreground mb-1">GTA Exam</h2>
-        <p className="text-sm text-muted-foreground mb-8">Examens chronométrés pour évaluer vos compétences GTA</p>
+        <h2 className="text-2xl font-bold text-foreground mb-1">GTA Achievement</h2>
+        <p className="text-sm text-muted-foreground mb-8">Évaluations pour mesurer vos compétences GTA</p>
         <div className="grid gap-4 sm:grid-cols-2">
           {levels.map((level, i) => (
             <motion.button
@@ -105,7 +105,7 @@ export default function GtaExam() {
             <div className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center mx-auto mb-4">
               <CheckCircle size={36} className="text-primary-foreground" />
             </div>
-            <h2 className="text-xl font-bold text-foreground mb-1">Examen terminé !</h2>
+            <h2 className="text-xl font-bold text-foreground mb-1">Évaluation terminée !</h2>
             <p className="text-sm text-muted-foreground">Niveau : {selectedLevel}</p>
           </div>
 
@@ -123,7 +123,7 @@ export default function GtaExam() {
           <div className="p-4 rounded-xl bg-secondary mb-6">
             <p className="text-xs font-semibold text-foreground mb-2">📋 Recommandations</p>
             <ul className="text-xs text-muted-foreground space-y-1">
-              <li>• Revoir le quiz "TransGP" pour renforcer vos connaissances</li>
+              <li>• Revoir l'entraînement "Astreinte" pour renforcer vos connaissances</li>
               <li>• Consulter l'Agent Paramétrage GTA pour les compteurs</li>
               <li>• Pratiquer la rédaction de réponses client avec l'Agent Support</li>
             </ul>
@@ -153,7 +153,7 @@ export default function GtaExam() {
   return (
     <div className="p-6 max-w-2xl mx-auto">
       <button onClick={() => setSelectedLevel(null)} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4">
-        <ArrowLeft size={16} /> Quitter l'examen
+        <ArrowLeft size={16} /> Quitter l'évaluation
       </button>
 
       {/* Timer + progress */}

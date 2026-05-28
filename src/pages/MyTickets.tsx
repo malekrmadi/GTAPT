@@ -14,7 +14,7 @@ interface TicketItem {
 const initialTickets: TicketItem[] = [
   { id: 1, title: "Anomalie compteur CP salarié #4521", priority: "High", theme: "Congés Payés", status: "En cours", time: "1h30" },
   { id: 2, title: "Paramétrage RTT nouveau client", priority: "Medium", theme: "RTT", status: "À faire", time: "2h" },
-  { id: 3, title: "Transfert GTA entité Lyon", priority: "High", theme: "TransGP", status: "En cours", time: "3h" },
+  { id: 3, title: "Transfert GTA entité Lyon", priority: "High", theme: "Astreinte", status: "En cours", time: "3h" },
   { id: 4, title: "Correction rapport heures sup", priority: "Low", theme: "Création de rapports", status: "Terminé", time: "45min" },
   { id: 5, title: "Mise à jour règles astreinte", priority: "Medium", theme: "Astreintes", status: "À faire", time: "1h" },
   { id: 6, title: "Vérification intégration paie mars", priority: "Medium", theme: "Intégration paie", status: "À faire", time: "2h" },
@@ -29,7 +29,7 @@ const priorityStyle: Record<string, string> = {
 
 const statusCols: ("À faire" | "En cours" | "Terminé")[] = ["À faire", "En cours", "Terminé"];
 
-const themes = ["Congés Payés", "RTT", "TransGP", "Astreintes", "Paramétrage GTA", "Création de rapports", "Support client GTA", "Intégration paie", "Heures supplémentaires"];
+const themes = ["Congés Payés", "RTT", "Astreinte", "Astreintes", "Paramétrage GTA", "Création de rapports", "Support client GTA", "Intégration paie", "Heures supplémentaires"];
 
 export default function MyTickets() {
   const [tickets, setTickets] = useState<TicketItem[]>(initialTickets);
