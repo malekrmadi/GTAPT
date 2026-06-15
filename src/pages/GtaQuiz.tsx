@@ -200,9 +200,9 @@ export default function GtaQuiz() {
           {score < mockQuestions.length && (
             <div className="text-left p-5 rounded-2xl bg-secondary mb-8">
               <p className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
-                <HelpCircle size={16} /> Recommandations de l'IA
+                <HelpCircle size={16} /> Recommandations de formation
               </p>
-              <p className="text-sm text-muted-foreground leading-relaxed">Nous vous conseillons de revoir le module "CP fractionnement" dans la base de connaissances et de demander des cas pratiques à l'assistant GTA PT pour approfondir.</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">Nous vous conseillons de revoir le module "CP fractionnement" dans la bibliothèque de skills et de refaire l'entraînement associé pour approfondir.</p>
             </div>
           )}
           <div className="flex gap-4 justify-center">

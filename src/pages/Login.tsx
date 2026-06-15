@@ -1,5 +1,5 @@
 import { useAuth, Role } from "@/contexts/AuthContext";
-import { Bot, User, Database, ArrowRight } from "lucide-react";
+import { User, Database, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +10,7 @@ export default function Login() {
   const handleLogin = (role: Role) => {
     login(role);
     if (role === "analyst") {
-      navigate("/");
+      navigate("/skills");
     } else {
       navigate("/manager/skills");
     }
@@ -37,15 +37,15 @@ export default function Login() {
             </div>
             <div>
               <h1 className="text-3xl font-bold tracking-tight text-foreground">AGP GTA Companion</h1>
-              <p className="text-muted-foreground text-sm font-medium">L'IA au service de l'expertise métier</p>
+              <p className="text-muted-foreground text-sm font-medium">Expertise paie & gestion des temps</p>
             </div>
           </div>
           <p className="text-foreground/80 leading-relaxed mb-8 max-w-md">
-            Bienvenue sur la plateforme unifiée de gestion des connaissances et d'assistance intelligente dédiée à la paie et la gestion des temps.
+            Bienvenue sur la plateforme unifiée de gestion des connaissances, formations et suivi de backlog dédiée à la paie et la gestion des temps.
           </p>
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-sm text-muted-foreground">
-              <Bot size={18} className="text-primary" /> Assistant IA intelligent
+              <Database size={18} className="text-primary" /> Bibliothèque de compétences métier
             </div>
             <div className="flex items-center gap-3 text-sm text-muted-foreground">
               <Database size={18} className="text-blue-500" /> Gestion unifiée des Skills
@@ -72,7 +72,7 @@ export default function Login() {
                 </div>
                 <div className="text-left">
                   <div className="font-semibold text-foreground">Analyste Fonctionnel</div>
-                  <div className="text-xs text-muted-foreground">Accès GTA PT, Skills, Backlog</div>
+                  <div className="text-xs text-muted-foreground">Skills, Training, My Backlog</div>
                 </div>
               </div>
               <ArrowRight size={18} className="text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />

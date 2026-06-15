@@ -31,7 +31,8 @@ function ProtectedRoutes() {
       <Routes>
         {user.role === "analyst" && (
           <>
-            <Route path="/" element={<GtaGpt />} />
+            <Route path="/" element={<Navigate to="/skills" replace />} />
+            <Route path="/assistant" element={<GtaGpt />} />
             <Route path="/skills" element={<GtaSkills />} />
             <Route path="/training" element={<GtaQuiz />} />
             <Route path="/backlog" element={<MyBacklog />} />

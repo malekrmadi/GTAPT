@@ -53,7 +53,7 @@ export default function BacklogManagement() {
     setStep(2);
     setTimeout(() => {
       setStep(3);
-      toast.success("Analyse IA terminée. Répartition effectuée.", {
+      toast.success("Analyse terminée. Répartition effectuée.", {
         icon: <Sparkles size={16} className="text-primary" />
       });
     }, 3500);
@@ -67,8 +67,8 @@ export default function BacklogManagement() {
     <div className="p-8 max-w-7xl mx-auto space-y-8 h-full flex flex-col relative">
       <div className="flex justify-between items-center shrink-0">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Analyse du Backlog IA</h1>
-          <p className="text-muted-foreground mt-1">L'IA analyse les extractions, qualifie les urgences et prépare les communications.</p>
+          <h1 className="text-3xl font-bold tracking-tight">Analyse du Backlog</h1>
+          <p className="text-muted-foreground mt-1">Importez les extractions, qualifiez les urgences et préparez les communications.</p>
         </div>
         {step === 3 && (
           <button 
@@ -100,9 +100,9 @@ export default function BacklogManagement() {
               <div className="w-24 h-24 bg-primary/5 text-primary rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-sm">
                 <FileSpreadsheet size={48} />
               </div>
-              <h2 className="text-2xl font-bold mb-2">Importez l'extraction Cybèle (Tickets)</h2>
+              <h2 className="text-2xl font-bold mb-2">Importez l'extraction Siebel (Tickets)</h2>
               <p className="text-muted-foreground max-w-md">
-                Glissez-déposez le fichier Excel exporté ce matin. L'IA va lire chaque ticket, croiser les mots clés et déterminer la criticité paie pour chaque analyste.
+                Glissez-déposez le fichier Excel exporté ce matin. Le système va lire chaque ticket, croiser les mots clés et déterminer la criticité paie pour chaque analyste.
               </p>
             </div>
           </motion.div>
@@ -123,7 +123,7 @@ export default function BacklogManagement() {
                 </div>
                 <div className="absolute inset-0 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
               </div>
-              <h2 className="text-2xl font-bold mb-6">L'IA analyse le backlog...</h2>
+              <h2 className="text-2xl font-bold mb-6">Analyse du backlog en cours...</h2>
               <div className="space-y-4 text-left w-full max-w-sm">
                 <div className="flex items-center gap-3 text-sm font-medium text-muted-foreground">
                   <CheckCircle2 size={18} className="text-green-500" /> Extraction lue avec succès (142 tickets)
@@ -193,7 +193,7 @@ export default function BacklogManagement() {
               <div className="bg-card border border-border rounded-3xl p-6 shadow-sm flex flex-col">
                 <div className="flex justify-between items-center mb-6 pb-4 border-b border-border">
                   <div className="flex items-center gap-2 text-primary font-bold">
-                    <Sparkles size={18} /> Message IA généré pour {activeAnalyst.name}
+                    <Sparkles size={18} /> Briefing généré pour {activeAnalyst.name}
                   </div>
                   <button className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                     Éditer manuellement

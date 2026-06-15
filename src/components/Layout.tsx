@@ -17,15 +17,15 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 
+// GTA PT conservé en route /assistant mais masqué du menu principal
 const analystNav = [
-  { path: "/", label: "GTA PT", icon: MessageSquare, desc: "Assistant IA" },
-  { path: "/skills", label: "GTA Skills", icon: Database, desc: "Bibliothèque" },
+  { path: "/skills", label: "GTA Skills", icon: Database, desc: "Bibliothèque métier" },
   { path: "/training", label: "GTA Training", icon: GraduationCap, desc: "Entraînements" },
-  { path: "/backlog", label: "My Backlog", icon: Ticket, desc: "Mes tickets" },
+  { path: "/backlog", label: "GTA My Backlog", icon: Ticket, desc: "Mes tickets" },
 ];
 
 const managerNav = [
-  { path: "/manager/skills", label: "Skills & Knowledge Base", icon: Database, desc: "Gestion des connaissances" },
+  { path: "/manager/skills", label: "Knowledge Base Manager", icon: Database, desc: "Gestion des connaissances" },
   { path: "/manager/backlog", label: "Backlog Management", icon: BarChart3, desc: "Gestion globale" },
 ];
 
@@ -62,8 +62,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <span className="text-primary-foreground font-bold text-sm">A</span>
               </div>
               <div>
-                <h1 className="text-primary-foreground font-bold text-sm leading-none">AGP GTA</h1>
-                <p className="text-sidebar-foreground text-[10px] mt-0.5">Companion AI</p>
+                <h1 className="text-primary-foreground font-bold text-sm leading-none">GTA Companion</h1>
+                <p className="text-sidebar-foreground text-[10px] mt-0.5">Expertise métier</p>
               </div>
             </motion.div>
           )}
@@ -183,7 +183,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       </div>
                       <div>
                         <p className="text-sm font-semibold text-foreground">Nouveau Skill ajouté</p>
-                        <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">L'admin a ajouté le skill "Congés Payés". Vous pouvez le tester dans le chat.</p>
+                        <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">L'admin a ajouté le skill "Congés Payés". Consultez-le dans la bibliothèque.</p>
                         <p className="text-[10px] text-muted-foreground mt-2 font-medium">Il y a 2 min</p>
                       </div>
                     </div>
@@ -195,7 +195,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       </div>
                       <div>
                         <p className="text-sm font-semibold text-foreground">Analyse Backlog terminée</p>
-                        <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">L'IA a terminé d'analyser vos priorités du jour.</p>
+                        <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">Votre briefing backlog du jour est disponible.</p>
                         <p className="text-[10px] text-muted-foreground mt-2 font-medium">Il y a 1h</p>
                       </div>
                     </div>
