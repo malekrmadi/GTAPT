@@ -12,10 +12,13 @@ import GtaQuiz from "./pages/GtaQuiz";
 import GtaExam from "./pages/GtaExam";
 import GtaSkills from "./pages/GtaSkills";
 import MyBacklog from "./pages/analyst/MyBacklog";
-import SkillsManagement from "./pages/manager/SkillsManagement";
+import ManagerSkillsPage from "./pages/manager/kb/SkillsPage";
+import ManagerDocumentsPage from "./pages/manager/kb/DocumentsPage";
+import ManagerTrainingBuilderPage from "./pages/manager/kb/TrainingBuilderPage";
 import KnowledgeBase from "./pages/manager/KnowledgeBase";
 import BacklogManagement from "./pages/manager/BacklogManagement";
 import NotFound from "./pages/NotFound";
+import AnalystDocumentsPage from "./pages/analyst/kb/DocumentsPage";
 
 const queryClient = new QueryClient();
 
@@ -34,13 +37,16 @@ function ProtectedRoutes() {
             <Route path="/" element={<Navigate to="/skills" replace />} />
             <Route path="/assistant" element={<GtaGpt />} />
             <Route path="/skills" element={<GtaSkills />} />
+            <Route path="/documents" element={<AnalystDocumentsPage />} />
             <Route path="/training" element={<GtaQuiz />} />
             <Route path="/backlog" element={<MyBacklog />} />
           </>
         )}
         {user.role === "manager" && (
           <>
-            <Route path="/manager/skills" element={<SkillsManagement />} />
+            <Route path="/manager/skills" element={<ManagerSkillsPage />} />
+            <Route path="/manager/documents" element={<ManagerDocumentsPage />} />
+            <Route path="/manager/training" element={<ManagerTrainingBuilderPage />} />
             <Route path="/manager/backlog" element={<BacklogManagement />} />
           </>
         )}

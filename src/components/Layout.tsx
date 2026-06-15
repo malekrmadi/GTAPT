@@ -19,13 +19,16 @@ import { useAuth } from "@/contexts/AuthContext";
 
 // GTA PT conservé en route /assistant mais masqué du menu principal
 const analystNav = [
-  { path: "/skills", label: "GTA Skills", icon: Database, desc: "Bibliothèque métier" },
+  { path: "/skills", label: "GTA Skills", icon: Database, desc: "Fiches métier (objectif + contexte)" },
+  { path: "/documents", label: "Base documentaire", icon: FileText, desc: "Documents de référence" },
   { path: "/training", label: "GTA Training", icon: GraduationCap, desc: "Entraînements" },
   { path: "/backlog", label: "GTA My Backlog", icon: Ticket, desc: "Mes tickets" },
 ];
 
 const managerNav = [
-  { path: "/manager/skills", label: "Knowledge Base Manager", icon: Database, desc: "Gestion des connaissances" },
+  { path: "/manager/skills", label: "Skills", icon: Database, desc: "Fiches métier structurées" },
+  { path: "/manager/documents", label: "Base documentaire", icon: FileText, desc: "Documents & dossiers" },
+  { path: "/manager/training", label: "Trainings", icon: GraduationCap, desc: "E-learning (QCM, exercices)" },
   { path: "/manager/backlog", label: "Backlog Management", icon: BarChart3, desc: "Gestion globale" },
 ];
 

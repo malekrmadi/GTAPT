@@ -54,7 +54,7 @@ const initialExams: Exam[] = [
   {
     id: "exam-1",
     title: "Bases Congés Payés",
-    description: "Évaluation des connaissances fondamentales sur l'acquisition et la prise des congés payés.",
+    description: "Training de mise en pratique sur l'acquisition et la prise des congés payés.",
     status: "published",
     createdAt: "10/06/2026",
     exercises: [
@@ -76,7 +76,7 @@ const initialExams: Exam[] = [
   {
     id: "exam-2",
     title: "RTT — Cadres au forfait jours",
-    description: "Vérification des règles de calcul et de gestion des RTT pour les cadres.",
+    description: "Training sur les règles de calcul et de gestion des RTT pour les cadres.",
     status: "draft",
     createdAt: "12/06/2026",
     exercises: [
@@ -120,7 +120,7 @@ export default function ExamManagement({ exams, onExamsChange }: Props) {
 
   const saveExam = () => {
     if (!editingExam?.title.trim()) {
-      toast.error("Le titre de l'examen est requis.");
+      toast.error("Le titre du training est requis.");
       return;
     }
     const hasEmptyExercise = editingExam.exercises.some((ex) => !ex.title.trim());
@@ -135,14 +135,14 @@ export default function ExamManagement({ exams, onExamsChange }: Props) {
     } else {
       onExamsChange([editingExam, ...exams]);
     }
-    toast.success(`Examen "${editingExam.title}" enregistré.`);
+    toast.success(`Training "${editingExam.title}" enregistré.`);
     setEditingExam(null);
     setIsCreating(false);
   };
 
   const deleteExam = (id: string) => {
     onExamsChange(exams.filter((e) => e.id !== id));
-    toast.success("Examen supprimé.");
+    toast.success("Training supprimé.");
   };
 
   const updateExam = (patch: Partial<Exam>) => {
@@ -209,7 +209,7 @@ export default function ExamManagement({ exams, onExamsChange }: Props) {
     updateQuestion(exId, qId, { options });
   };
 
-  // ── Éditeur d'examen ──
+  // ── Éditeur de training ──
   if (editingExam) {
     const totalQuestions = editingExam.exercises.reduce((s, ex) => s + ex.questions.length, 0);
 
@@ -224,17 +224,17 @@ export default function ExamManagement({ exams, onExamsChange }: Props) {
 
         <div className="bg-card border border-border rounded-3xl p-8 shadow-sm space-y-8">
           <div>
-            <h2 className="text-2xl font-bold mb-1">{isCreating ? "Créer un examen" : "Modifier l'examen"}</h2>
+            <h2 className="text-2xl font-bold mb-1">{isCreating ? "Créer un training" : "Modifier le training"}</h2>
             <p className="text-sm text-muted-foreground">Définissez le contenu pédagogique et les questions à choix multiples.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-sm font-semibold">Titre de l'examen</label>
+              <label className="text-sm font-semibold">Titre du training</label>
               <input
                 value={editingExam.title}
                 onChange={(e) => updateExam({ title: e.target.value })}
-                placeholder="Ex: Évaluation Congés Payés — Niveau 1"
+                placeholder="Ex: Training Congés Payés — Niveau 1"
                 className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/50 outline-none"
               />
             </div>
@@ -376,7 +376,7 @@ export default function ExamManagement({ exams, onExamsChange }: Props) {
               Annuler
             </button>
             <button onClick={saveExam} className="px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all flex items-center gap-2 shadow-md">
-              <Save size={18} /> Enregistrer l'examen
+              <Save size={18} /> Enregistrer le training
             </button>
           </div>
         </div>
@@ -384,19 +384,19 @@ export default function ExamManagement({ exams, onExamsChange }: Props) {
     );
   }
 
-  // ── Liste des examens ──
+  // ── Liste des trainings ──
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-xl font-bold">Examens & Évaluations</h2>
-          <p className="text-sm text-muted-foreground mt-1">Créez et organisez les formations évaluatives pour les analystes.</p>
+          <h2 className="text-xl font-bold">Trainings</h2>
+          <p className="text-sm text-muted-foreground mt-1">Créez et organisez des trainings e-learning (exercices + QCM).</p>
         </div>
         <button
           onClick={startCreate}
           className="flex items-center gap-2 px-5 py-2.5 bg-foreground text-background font-medium rounded-xl hover:bg-foreground/90 transition-colors shadow-lg"
         >
-          <Plus size={18} /> Créer un examen
+          <Plus size={18} /> Créer un training
         </button>
       </div>
 
